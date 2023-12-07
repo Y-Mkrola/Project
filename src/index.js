@@ -22,7 +22,7 @@ function displayTemperature(response) {
     let hours = date.getHours();
     let day = date.getDay();
   
-    if (minutes < 10) {
+    if (minutes < 9) {
       minutes = `0${minutes}`;
     }
   
