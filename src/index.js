@@ -5,10 +5,10 @@ function displayTemperature(response) {
     let descriptionElement= document.querySelector("description");
     cityElement.innerHTML = response.data.city;
     descriptionElement.innerHTML=response.data.condtion.description;
-    
+
     temperatureElement.innerHTML = temperature;
 
-    console.log(response.data.condition.description);
+    console.log(response.data);
   }
 
   function search(event) {
