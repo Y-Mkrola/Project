@@ -1,5 +1,5 @@
 function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#current-temperature-main");
+  let temperatureElement = document.querySelector("#current-temperature");
   let cityElement = document.querySelector("#current-city");
   let descriptionElementMain = document.querySelector("#description-main");
   let humidityElementMain = document.querySelector("#humidity-main");
