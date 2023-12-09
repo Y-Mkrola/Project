@@ -32,25 +32,24 @@
           <div>
             <h1 class="current-city" id="current-city">East London</h1>
             <p class="current-details">
-              <span id="current-date"></span>, <span id="description"></span> <br />
-              Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+              <span id="current-date-main"></span>, <span id="description-main"></span> <br />
+              Humidity: <strong id="humidity-main">87%</strong>, Wind: <strong id="wind-speed-main">7.2km/h</strong>
             </p>
           </div>
           <div class="current-temperature">
             <span class="current-temperature-icon">☀️</span>
-            <span class="current-temperature-value" id="current-temperature">24</span>
+            <span class="current-temperature-value" id="current-temperature-main">24</span>
             <span class="current-temperature-unit">°C</span>
           </div>
         </div>
        
-<div class="weather-icon-container">
-  <span class="current-temperature-icon" id="weather-icon"></span>
-</div>
-<p class="current-details" id="weather-details">
-  <span id="current-date"></span>, <span id="description"></span> <br />
-  Humidity: <strong id="humidity">87%</strong>, Wind: <strong id="wind-speed">7.2 km/h</strong>
-</p>
-
+        <div class="weather-icon-container">
+          <span class="current-temperature-icon" id="weather-icon"></span>
+        </div>
+        <p class="current-details" id="weather-details">
+          <span id="current-date-details"></span>, <span id="description-details"></span> <br />
+          Humidity: <strong id="humidity-details">87%</strong>, Wind: <strong id="wind-speed-details">7.2 km/h</strong>
+        </p>
       </main>
       <footer>
         <p>
@@ -61,7 +60,6 @@
           and
           <a href="https://jazzy-rolypoly-d8555c.netlify.app/" target="_blank">Hosted on Netlify</a>
         </p>
-        
       </footer>
     </div>
   </body>
