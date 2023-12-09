@@ -1,55 +1,50 @@
 function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#current-temperature");
-  let temperature = Math.round(response.data.temperature.current);
+  let temperatureElement = document.querySelector("#current-temperature-main");
   let cityElement = document.querySelector("#current-city");
-  let descriptionElement = document.querySelector("#description");
-  let humidityElement = document.querySelector("#humidity");
-  let windSpeedElement = document.querySelector("#wind-speed");
-  let weatherIconElement = document.querySelector("#weather-icon");
+  let descriptionElementMain = document.querySelector("#description-main");
+  let humidityElementMain = document.querySelector("#humidity-main");
+  let windSpeedElementMain = document.querySelector("#wind-speed-main");
+  let weatherIconElementMain = document.querySelector("#weather-icon-main");
 
   cityElement.innerHTML = response.data.city;
-  descriptionElement.innerHTML = response.data.condition.description;
-  humidityElement.innerHTML = response.data.humidity;
-  windSpeedElement.innerHTML = response.data.wind.speed;
-  temperatureElement.innerHTML = temperature;
+  descriptionElementMain.innerHTML = response.data.condition.description;
+  humidityElementMain.innerHTML = response.data.humidity;
+  windSpeedElementMain.innerHTML = response.data.wind.speed;
 
-  setWeatherIcon(weatherIconElement, response.data.condition.icon);
+  temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+  setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
+
+  let descriptionElementDetails = document.querySelector("#description-details");
+  let humidityElementDetails = document.querySelector("#humidity-details");
+  let windSpeedElementDetails = document.querySelector("#wind-speed-details");
+  let weatherIconElementDetails = document.querySelector("#weather-icon-details");
+
+  descriptionElementDetails.innerHTML = response.data.condition.description;
+  humidityElementDetails.innerHTML = response.data.humidity;
+  windSpeedElementDetails.innerHTML = response.data.wind.speed;
+  setWeatherIcon(weatherIconElementDetails, response.data.condition.icon);
 
   console.log(response.data);
 }
 
 function setWeatherIcon(element, iconCode) {
   const iconMappings = {
-    "01d": "☀️", // clear sky day
-    "01n": "🌙", // clear sky night
-    "02d": "⛅", // few clouds day
-    "02n": "🌥️", // few clouds night
-    "03d": "☁️", // scattered clouds day
-    "03n": "☁️", // scattered clouds night
-    "04d": "☁️", // broken clouds day
-    "04n": "☁️", // broken clouds night
-    "09d": "🌧️", // shower rain day
-    "09n": "🌧️", // shower rain night
-    "10d": "🌦️", // rain day
-    "10n": "🌦️", // rain night
-    "11d": "⛈️", // thunderstorm day
-    "11n": "⛈️", // thunderstorm night
-    "13d": "❄️", // snow day
-    "13n": "❄️", // snow night
-    "50d": "🌫️", // mist day
-    "50n": "🌫️", // mist night
+    "01d": "☀️", "01n": "🌙", "02d": "⛅", "02n": "🌥️",
+    "03d": "☁️", "03n": "☁️", "04d": "☁️", "04n": "☁️",
+    "09d": "🌧️", "09n": "🌧️", "10d": "🌦️", "10n": "🌦️",
+    "11d": "⛈️", "11n": "⛈️", "13d": "❄️", "13n": "❄️",
+    "50d": "🌫️", "50n": "🌫️"
   };
 
   element.innerHTML = iconMappings[iconCode] || "❓";
 }
-
-let apiKey = "57821c3b75b60c68ecd1a8d0dd1aa8d3";
 
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
 
+  let apiKey = "57821c3b75b60c68ecd1a8d0dd1aa8d3";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayTemperature);
@@ -68,17 +63,9 @@ function formatDate(date) {
     hours = `0${hours}`;
   }
 
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   let formattedDay = days[day];
+
   return `${formattedDay} ${hours}:${minutes}`;
 }
 
