@@ -5,6 +5,11 @@ function displayTemperature(response) {
   let humidityElementMain = document.querySelector("#humidity-main");
   let windSpeedElementMain = document.querySelector("#wind-speed-main");
   let weatherIconElementMain = document.querySelector("#weather-icon-main");
+  let currentDateElementMain = document.querySelector("#current-date-main");
+  let currentDateElementDetails = document.querySelector("#current-date-details");
+  let currentDate = new Date();
+  currentDateElementMain.innerHTML = formatDate(currentDate);
+  currentDateElementDetails.innerHTML = formatDate(currentDate);
 
   cityElement.innerHTML = response.data.city;
   descriptionElementMain.innerHTML = response.data.condition.description;
@@ -47,6 +52,7 @@ function search(event) {
 
 
 function formatDate(date) {
+
   let minutes = date.getMinutes();
   let hours = date.getHours();
   let day = date.getDay();
