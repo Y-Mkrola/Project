@@ -44,13 +44,14 @@ function search(event) {
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
 
-  let apiKey = "6a31bo1005009840837b5525f35tf65a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query={East London}&key={6a31bo1005009840837b5525f35tf65a}}`;
+  let apiKey = "6a31b01005009840837b5525f35tf65a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
+  console.log("API URL:", apiUrl);
 
   axios.get(apiUrl).then(displayTemperature);
-  console.log("API URL:", apiUrl); 
-  axios.get(apiUrl).then(displayTemperature);
 }
+
 
 function formatDate(date) {
   let minutes = date.getMinutes();
