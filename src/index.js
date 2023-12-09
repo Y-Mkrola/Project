@@ -12,17 +12,9 @@ function displayTemperature(response) {
   windSpeedElementMain.innerHTML = response.data.wind.speed;
 
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+  
   setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
 
-  let descriptionElementDetails = document.querySelector("#description-details");
-  let humidityElementDetails = document.querySelector("#humidity-details");
-  let windSpeedElementDetails = document.querySelector("#wind-speed-details");
-  let weatherIconElementDetails = document.querySelector("#weather-icon-details");
-
-  descriptionElementDetails.innerHTML = response.data.condition.description;
-  humidityElementDetails.innerHTML = response.data.humidity;
-  windSpeedElementDetails.innerHTML = response.data.wind.speed;
-  setWeatherIcon(weatherIconElementDetails, response.data.condition.icon);
 
   console.log(response.data);
 }
