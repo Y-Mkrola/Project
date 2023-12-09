@@ -45,7 +45,7 @@ function search(event) {
   let city = searchInputElement.value;
 
   let apiKey = "6a31bo1005009840837b5525f35tf65a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query={query}&key={key}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query={East London}&key={6a31bo1005009840837b5525f35tf65a}}`;
 
   axios.get(apiUrl).then(displayTemperature);
   console.log("API URL:", apiUrl); 
