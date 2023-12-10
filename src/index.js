@@ -35,20 +35,17 @@ function setWeatherIcon(element, iconCode) {
 
   element.innerHTML = iconMappings[iconCode] || "❓";
 }
-
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
 
-  let apiKey = "6a31bo1005009840837b5525f35tf65a";
+  let apiKey = "57821c3b75b60c68ecd1a8d0dd1aa8d3";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
-
-  console.log("API URL:", apiUrl);
 
   axios.get(apiUrl).then(displayTemperature);
 }
+
 
 
 function formatDate(date) {
