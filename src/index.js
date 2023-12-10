@@ -17,9 +17,7 @@ function displayTemperature(response) {
 
     temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
-
-
-    currentDateMain.innerHTML = formatDate(new Date());
+  
     currentDateDetails.innerHTML = formatDate(new Date());
   } else {
     console.error("One or more elements not found in HTML.");
