@@ -2,26 +2,21 @@ function displayTemperature(response) {
   let temperatureElement = document.querySelector("#current-temperature");
   let cityElement = document.querySelector("#current-city");
   let descriptionElementMain = document.querySelector("#description-main");
-  let humidityElementMain = document.querySelector("#humidity-main");
-  let windSpeedElementMain = document.querySelector("#wind-speed-main");
+  let humidityElementMain = document.querySelector("#humidity-details");
+  let windSpeedElementMain = document.querySelector("#wind-speed-details");
   let weatherIconElementMain = document.querySelector("#weather-icon-main");
-  let currentDateElementMain = document.querySelector("#current-date-main");
-  let currentDateElementDetails = document.querySelector("#current-date-details");
-  let currentDate = new Date();
-  currentDateElementMain.innerHTML = formatDate(currentDate);
-  currentDateElementDetails.innerHTML = formatDate(currentDate);
 
-  cityElement.innerHTML = response.data.city;
-  descriptionElementMain.innerHTML = response.data.condition.description;
-  humidityElementMain.innerHTML = response.data.humidity;
-  windSpeedElementMain.innerHTML = response.data.wind.speed;
+  if (temperatureElement && cityElement && descriptionElementMain && humidityElementMain && windSpeedElementMain && weatherIconElementMain) {
+    cityElement.innerHTML = response.data.city;
+    descriptionElementMain.innerHTML = response.data.condition.description;
+    humidityElementMain.innerHTML = response.data.humidity;
+    windSpeedElementMain.innerHTML = response.data.wind.speed;
 
-  temperatureElement.innerHTML = Math.round(response.data.temperature.current);
-  
-  setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
-
-
-  console.log(response.data);
+    temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+    setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
+  } else {
+    console.error("One or more elements not found in HTML.");
+  }
 }
 
 function setWeatherIcon(element, iconCode) {
@@ -35,37 +30,16 @@ function setWeatherIcon(element, iconCode) {
 
   element.innerHTML = iconMappings[iconCode] || "❓";
 }
+
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
 
   let apiKey = "6a31bo1005009840837b5525f35tf65a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
   axios.get(apiUrl).then(displayTemperature);
-}
-
-
-
-function formatDate(date) {
-
-  let minutes = date.getMinutes();
-  let hours = date.getHours();
-  let day = date.getDay();
-
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let formattedDay = days[day];
-
-  return `${formattedDay} ${hours}:${minutes}`;
 }
 
 let searchForm = document.querySelector("#search-form");
