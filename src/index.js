@@ -37,7 +37,7 @@ function setWeatherIcon(element, iconCode) {
     "50d": "🌫️", "50n": "🌫️"
   };
 
-  element.innerHTML = iconMappings[iconCode] || "❄️";
+  element.innerHTML = iconMappings[iconCode] || "⛅";
 }
 
 
