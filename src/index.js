@@ -18,7 +18,7 @@ function displayTemperature(response) {
     temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
 
-    // Display current date
+
     currentDateMain.innerHTML = formatDate(new Date());
     currentDateDetails.innerHTML = formatDate(new Date());
   } else {
@@ -26,7 +26,6 @@ function displayTemperature(response) {
   }
 }
 
-// ... (rest of the code remains unchanged)
 
 
 function setWeatherIcon(element, iconCode) {
@@ -40,6 +39,8 @@ function setWeatherIcon(element, iconCode) {
 
   element.innerHTML = iconMappings[iconCode] || "❓";
 }
+
+
 
 function search(event) {
   event.preventDefault();
