@@ -1,23 +1,33 @@
+// Updated JavaScript
 function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#current-temperature");
-  let cityElement = document.querySelector("#current-city");
+  let temperatureElement = document.querySelector("#current-temperature-main");
+  let cityElementMain = document.querySelector("#current-city-main");
   let descriptionElementMain = document.querySelector("#description-main");
-  let humidityElementMain = document.querySelector("#humidity-details");
-  let windSpeedElementMain = document.querySelector("#wind-speed-details");
+  let humidityElementDetails = document.querySelector("#humidity-details");
+  let windSpeedElementDetails = document.querySelector("#wind-speed-details");
   let weatherIconElementMain = document.querySelector("#weather-icon-main");
+  let currentDateMain = document.querySelector("#current-date-main");
+  let currentDateDetails = document.querySelector("#current-date-details");
 
-  if (temperatureElement && cityElement && descriptionElementMain && humidityElementMain && windSpeedElementMain && weatherIconElementMain) {
-    cityElement.innerHTML = response.data.city;
+  if (temperatureElement && cityElementMain && descriptionElementMain && humidityElementDetails && windSpeedElementDetails && weatherIconElementMain) {
+    cityElementMain.innerHTML = response.data.city;
     descriptionElementMain.innerHTML = response.data.condition.description;
-    humidityElementMain.innerHTML = response.data.humidity;
-    windSpeedElementMain.innerHTML = response.data.wind.speed;
+    humidityElementDetails.innerHTML = response.data.humidity;
+    windSpeedElementDetails.innerHTML = response.data.wind.speed;
 
     temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
+
+    // Display current date
+    currentDateMain.innerHTML = formatDate(new Date());
+    currentDateDetails.innerHTML = formatDate(new Date());
   } else {
     console.error("One or more elements not found in HTML.");
   }
 }
+
+// ... (rest of the code remains unchanged)
+
 
 function setWeatherIcon(element, iconCode) {
   const iconMappings = {
