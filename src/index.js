@@ -40,7 +40,7 @@ function search(event) {
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
 
-  let apiKey = "57821c3b75b60c68ecd1a8d0dd1aa8d3";
+  let apiKey = "6a31bo1005009840837b5525f35tf65a";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayTemperature);
