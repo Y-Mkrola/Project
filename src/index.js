@@ -9,7 +9,22 @@ function displayTemperature(response) {
   const currentDateMain = document.querySelector("#current-date-main");
   const currentDateDetails = document.querySelector("#current-date-details");
 
-  if (temperatureElement && cityElementMain && descriptionElementMain && humidityElementDetails && windSpeedElementDetails && weatherIconElementMain) {
+  if (
+    temperatureElement &&
+    cityElementMain &&
+    descriptionElementMain &&
+    humidityElementDetails &&
+    windSpeedElementDetails &&
+    weatherIconElementMain &&
+    response.data &&
+    response.data.city &&
+    response.data.condition &&
+    response.data.condition.description !== undefined &&
+    response.data.humidity !== undefined &&
+    response.data.wind !== undefined &&
+    response.data.temperature &&
+    response.data.temperature.current !== undefined
+  ) {
     cityElementMain.textContent = response.data.city;
     descriptionElementMain.textContent = response.data.condition.description;
     humidityElementDetails.textContent = response.data.humidity;
@@ -20,9 +35,10 @@ function displayTemperature(response) {
   
     currentDateDetails.textContent = formatDate(new Date());
   } else {
-    console.error("One or more elements not found in HTML.");
+    console.error("One or more elements not found or data is missing in the response.");
   }
 }
+
 
 
 function setWeatherIcon(element, iconCode) {
