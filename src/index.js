@@ -71,14 +71,12 @@ function search(event) {
 
 
 
-const searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", search);
-
-
 function displayForecast(response) {
-  if (response && response.data) {
+  const forecastElement = document.querySelector("#forecast");
+
+  if (response && response.data && forecastElement) {
     console.log(response.data);
-   
+    // Add your code to display the forecast data on the page
   } else {
     console.error("Invalid or empty response received in displayForecast:", response);
   }
@@ -105,5 +103,19 @@ window.onload = function () {
   search({ preventDefault: () => {} }); 
 };
 
+axios.get(currentWeatherApiUrl)
+  .then(response => {
+    displayTemperature(response);
+    getForecast(city);
+  })
+  .catch(error => {
+    console.error("Error in current weather API request:", error);
+  });
+
+axios.get(forecastApiUrl)
+  .then(displayForecast)
+  .catch(error => {
+    console.error("Error in forecast API request:", error);
+  });
 
 
