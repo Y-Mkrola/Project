@@ -55,7 +55,7 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
 function displayForecast() {
-  let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
+  let days = ["Mon","Tue", "Wed", "Thur", "Fri", "Sat","Sun"];
   let forecastHTML = "";
 
   days.forEach(function (day) {
