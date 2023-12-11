@@ -43,11 +43,16 @@ function search(event) {
   const city = searchInputElement.value;
 
   const apiKey = "6a31bo1005009840837b5525f35tf65a";
-  const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  const currentWeatherApiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
-  axios.get(apiUrl).then(displayTemperature);
-  getForecast(city); 
+  axios.get(currentWeatherApiUrl).then(response => {
+    displayTemperature(response);
+    getForecast(city);
+  });
 }
+
+
+
 
 
 const searchForm = document.querySelector("#search-form");
@@ -62,10 +67,11 @@ function displayForecast(response) {
 
 function getForecast(city) {
   const apiKey = "6a31bo1005009840837b5525f35tf65a";
-  const apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+  const forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
 
-  axios(apiUrl).then(displayForecast);
+  axios.get(forecastApiUrl).then(displayForecast);
 }
+
 
 
 function formatDate(date) {
