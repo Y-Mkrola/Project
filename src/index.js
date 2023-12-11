@@ -60,9 +60,14 @@ searchForm.addEventListener("submit", search);
 
 
 function displayForecast(response) {
-  console.log(response.data);
-
+  if (response && response.data) {
+    console.log(response.data);
+   
+  } else {
+    console.error("Invalid or empty response received in displayForecast:", response);
+  }
 }
+
 
 
 function getForecast(city) {
@@ -80,8 +85,9 @@ function formatDate(date) {
 }
 
 
-window.onload = function() {
-  displayForecast();
+window.onload = function () {
+  search({ preventDefault: () => {} }); 
 };
+
 
 
