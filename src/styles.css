@@ -9,10 +9,10 @@ a {
 
 .weather-app {
   background: url(https://media.istockphoto.com/id/1306075353/photo/morning-fog-over-a-beautiful-lake-surrounded-by-pine-forest-stock-photo.jpg?s=1024x1024&w=is&k=20&c=kaWLDuJ1VFy_rsRI7QFtzS6MAm-Zj2l1roogWOOgGlQ=);
-  max-width: 500px;
+  max-width: 600px;
   margin: 60px auto;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
 }
 
@@ -99,7 +99,7 @@ footer {
 }
 .weather-forecast-date {
   font-size: 16px;
-color: #f65282;
+color: blueviolet;
 opacity: 0.5;
 }
 .weather-forecast-tempreture{
@@ -108,7 +108,7 @@ opacity: 0.5;
 .weather-forecast{
   margin-top: 20px;
   text-align: center;
-  color: black;
+  color: white;
   display: flex;
 }
 .weather-forecast-tempreture-min{
