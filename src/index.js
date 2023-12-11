@@ -78,4 +78,14 @@ function displayForecast() {
 window.onload = function() {
   displayForecast();
 };
+function getForecast(city) {
+  let apiKey = "6a31bo1005009840837b5525f35tf65a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
 
+  axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  console.log(response.data);
+
+}
