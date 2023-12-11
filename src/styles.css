@@ -97,6 +97,12 @@ footer {
   padding-top: 15px;
   color: rgba(39, 33, 66, 0.4);
 }
-
+.weather-forecast-date {
+  font-size: 16px;
+color: #f65282;
+}
+.weather-forecast-tempreture{
+  font-size: 13px;
+}
   
   
