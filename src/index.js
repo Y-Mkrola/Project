@@ -75,4 +75,7 @@ function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHTML;
 }
+window.onload = function() {
+  displayForecast();
+};
 
