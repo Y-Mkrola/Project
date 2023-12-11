@@ -100,9 +100,19 @@ footer {
 .weather-forecast-date {
   font-size: 16px;
 color: #f65282;
+opacity: 0.5;
 }
 .weather-forecast-tempreture{
   font-size: 13px;
 }
+.weather-forecast{
+  margin-top: 20px;
+  text-align: center;
+  color: black;
+}
+.weather-forecast-tempreture-min{
+  opacity: 0.5;
+}
+
   
   
