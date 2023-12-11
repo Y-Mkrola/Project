@@ -1,29 +1,28 @@
-// Updated JavaScript
+
 function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#current-temperature-main");
-  let cityElementMain = document.querySelector("#current-city-main");
-  let descriptionElementMain = document.querySelector("#description-main");
-  let humidityElementDetails = document.querySelector("#humidity-details");
-  let windSpeedElementDetails = document.querySelector("#wind-speed-details");
-  let weatherIconElementMain = document.querySelector("#weather-icon-main");
-  let currentDateMain = document.querySelector("#current-date-main");
-  let currentDateDetails = document.querySelector("#current-date-details");
+  const temperatureElement = document.querySelector("#current-temperature-main");
+  const cityElementMain = document.querySelector("#current-city-main");
+  const descriptionElementMain = document.querySelector("#description-main");
+  const humidityElementDetails = document.querySelector("#humidity-details");
+  const windSpeedElementDetails = document.querySelector("#wind-speed-details");
+  const weatherIconElementMain = document.querySelector("#weather-icon-main");
+  const currentDateMain = document.querySelector("#current-date-main");
+  const currentDateDetails = document.querySelector("#current-date-details");
 
   if (temperatureElement && cityElementMain && descriptionElementMain && humidityElementDetails && windSpeedElementDetails && weatherIconElementMain) {
-    cityElementMain.innerHTML = response.data.city;
-    descriptionElementMain.innerHTML = response.data.condition.description;
-    humidityElementDetails.innerHTML = response.data.humidity;
-    windSpeedElementDetails.innerHTML = response.data.wind.speed;
+    cityElementMain.textContent = response.data.city;
+    descriptionElementMain.textContent = response.data.condition.description;
+    humidityElementDetails.textContent = response.data.humidity;
+    windSpeedElementDetails.textContent = response.data.wind.speed;
 
-    temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+    temperatureElement.textContent = Math.round(response.data.temperature.current);
     setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
   
-    currentDateDetails.innerHTML = formatDate(new Date());
+    currentDateDetails.textContent = formatDate(new Date());
   } else {
     console.error("One or more elements not found in HTML.");
   }
 }
-
 
 
 function setWeatherIcon(element, iconCode) {
@@ -35,57 +34,48 @@ function setWeatherIcon(element, iconCode) {
     "50d": "🌫️", "50n": "🌫️"
   };
 
-  element.innerHTML = iconMappings[iconCode] || "⛅";
+  element.textContent = iconMappings[iconCode] || "⛅";
 }
-
-
 
 function search(event) {
   event.preventDefault();
-  let searchInputElement = document.querySelector("#search-input");
-  let city = searchInputElement.value;
+  const searchInputElement = document.querySelector("#search-input");
+  const city = searchInputElement.value;
 
-  let apiKey = "6a31bo1005009840837b5525f35tf65a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  const apiKey = "6a31bo1005009840837b5525f35tf65a";
+  const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
   axios.get(apiUrl).then(displayTemperature);
+  getForecast(city); 
 }
 
-let searchForm = document.querySelector("#search-form");
+
+const searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
-function displayForecast() {
-  let days = ["Mon","Tue", "Wed", "Thur", "Fri", "Sat","Sun"];
-  let forecastHTML = "";
-
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-      <div class="weather-forecast-day">
-        <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon">🌙</div>
-        <div class="weather-forecast-temperature">
-          <div class="weather-forecast-temperature-max"><strong>22°</strong></div>
-          <div class="weather-forecast-temperature-min">15°</div>
-        </div>
-      </div>`;
-  });
-
-  let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = forecastHTML;
-}
-window.onload = function() {
-  displayForecast();
-};
-function getForecast(city) {
-  let apiKey = "6a31bo1005009840837b5525f35tf65a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
-
-  axios(apiUrl).then(displayForecast);
-}
 
 function displayForecast(response) {
   console.log(response.data);
 
 }
+
+
+function getForecast(city) {
+  const apiKey = "6a31bo1005009840837b5525f35tf65a";
+  const apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+
+  axios(apiUrl).then(displayForecast);
+}
+
+
+function formatDate(date) {
+
+  return date.toDateString();
+}
+
+
+window.onload = function() {
+  displayForecast();
+};
+
+
