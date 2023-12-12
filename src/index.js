@@ -1,43 +1,29 @@
-
 function displayTemperature(response) {
-  const temperatureElement = document.querySelector("#current-temperature-main");
-  const cityElementMain = document.querySelector("#current-city-main");
-  const descriptionElementMain = document.querySelector("#description-main");
-  const humidityElementDetails = document.querySelector("#humidity-details");
-  const windSpeedElementDetails = document.querySelector("#wind-speed-details");
-  const weatherIconElementMain = document.querySelector("#weather-icon-main");
-  const currentDateMain = document.querySelector("#current-date-main");
-  const currentDateDetails = document.querySelector("#current-date-details");
+  let temperatureElement = document.querySelector("#current-temperature-main");
+  let cityElementMain = document.querySelector("#current-city-main");
+  let descriptionElementMain = document.querySelector("#description-main");
+  let humidityElementDetails = document.querySelector("#humidity-details");
+  let windSpeedElementDetails = document.querySelector("#wind-speed-details");
+  let weatherIconElementMain = document.querySelector("#weather-icon-main");
+  let currentDateMain = document.querySelector("#current-date-main");
+  let currentDateDetails = document.querySelector("#current-date-details");
 
-  if (
-    temperatureElement &&
-    cityElementMain &&
-    descriptionElementMain &&
-    humidityElementDetails &&
-    windSpeedElementDetails &&
-    weatherIconElementMain &&
-    response.data &&
-    response.data.city &&
-    response.data.condition &&
-    response.data.condition.description !== undefined &&
-    response.data.humidity !== undefined &&
-    response.data.wind !== undefined &&
-    response.data.temperature &&
-    response.data.temperature.current !== undefined
-  ) {
-    cityElementMain.textContent = response.data.city;
-    descriptionElementMain.textContent = response.data.condition.description;
-    humidityElementDetails.textContent = response.data.humidity;
-    windSpeedElementDetails.textContent = response.data.wind.speed;
+  if (temperatureElement && cityElementMain && descriptionElementMain && humidityElementDetails && windSpeedElementDetails && weatherIconElementMain) {
+    cityElementMain.innerHTML = response.data.city;
+    descriptionElementMain.innerHTML = response.data.condition.description;
+    humidityElementDetails.innerHTML = response.data.humidity;
+    windSpeedElementDetails.innerHTML = response.data.wind.speed;
 
-    temperatureElement.textContent = Math.round(response.data.temperature.current);
+    temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
-
-    currentDateDetails.textContent = formatDate(new Date());
+  
+    currentDateDetails.innerHTML = formatDate(new Date());
   } else {
-    console.error("One or more elements not found or data is missing in the response.");
+    console.error("One or more elements not found in HTML.");
   }
 }
+
+
 
 function setWeatherIcon(element, iconCode) {
   const iconMappings = {
@@ -48,58 +34,58 @@ function setWeatherIcon(element, iconCode) {
     "50d": "🌫️", "50n": "🌫️"
   };
 
-  element.textContent = iconMappings[iconCode] || "⛅";
+  element.innerHTML = iconMappings[iconCode] || "⛅";
 }
+
+
 
 function search(event) {
   event.preventDefault();
-  const searchInputElement = document.querySelector("#search-input");
-  const city = searchInputElement.value;
+  let searchInputElement = document.querySelector("#search-input");
+  let city = searchInputElement.value;
 
-  const apiKey = "6a31bo1005009840837b5525f35tf65a";
-  const currentWeatherApiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiKey = "6a31bo1005009840837b5525f35tf65a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
-  axios.get(currentWeatherApiUrl)
-    .then(response => {
-      displayTemperature(response);
-      getForecast(city);
-    })
-    .catch(error => {
-      console.error("Error in current weather API request:", error);
-    });
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", search);
+
+function displayForecast() {
+  let days = ["Mon","Tue", "Wed", "Thur", "Fri", "Sat","Sun"];
+  let forecastHTML = "";
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-icon">🌙</div>
+        <div class="weather-forecast-temperature">
+          <div class="weather-forecast-temperature-max"><strong>22°</strong></div>
+          <div class="weather-forecast-temperature-min">15°</div>
+        </div>
+      </div>`;
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHTML;
+}
+window.onload = function() {
+  displayForecast();
+};
+function getForecast(city) {
+  let apiKey = "6a31bo1005009840837b5525f35tf65a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+
+  axios(apiUrl).then(displayForecast);
 }
 
 function displayForecast(response) {
-  const forecastElement = document.querySelector("#forecast");
+  console.log(response.data);
 
-  if (response && response.data && forecastElement) {
-    console.log(response.data);
-    
-  } else {
-    console.error("Invalid or empty response received in displayForecast:", response);
-  }
 }
-
-function getForecast(city) {
-  const apiKey = "6a31bo1005009840837b5525f35tf65a";
-  const forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
-
-  axios.get(forecastApiUrl)
-    .then(displayForecast)
-    .catch(error => {
-      console.error("Error in forecast API request:", error);
-    });
-}
-
-function formatDate(date) {
-  return date.toDateString();
-}
-
-const searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", search);
-
-window.onload = function () {
-  search({ preventDefault: () => {} });
-};
-
 
