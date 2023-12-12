@@ -32,14 +32,12 @@ function displayTemperature(response) {
 
     temperatureElement.textContent = Math.round(response.data.temperature.current);
     setWeatherIcon(weatherIconElementMain, response.data.condition.icon);
-  
+
     currentDateDetails.textContent = formatDate(new Date());
   } else {
     console.error("One or more elements not found or data is missing in the response.");
   }
 }
-
-
 
 function setWeatherIcon(element, iconCode) {
   const iconMappings = {
@@ -61,61 +59,47 @@ function search(event) {
   const apiKey = "6a31bo1005009840837b5525f35tf65a";
   const currentWeatherApiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
-  axios.get(currentWeatherApiUrl).then(response => {
-    displayTemperature(response);
-    getForecast(city);
-  });
+  axios.get(currentWeatherApiUrl)
+    .then(response => {
+      displayTemperature(response);
+      getForecast(city);
+    })
+    .catch(error => {
+      console.error("Error in current weather API request:", error);
+    });
 }
-
-
-
-
 
 function displayForecast(response) {
   const forecastElement = document.querySelector("#forecast");
 
   if (response && response.data && forecastElement) {
     console.log(response.data);
-    // Add your code to display the forecast data on the page
+    
   } else {
     console.error("Invalid or empty response received in displayForecast:", response);
   }
 }
 
-
-
 function getForecast(city) {
   const apiKey = "6a31bo1005009840837b5525f35tf65a";
   const forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
 
-  axios.get(forecastApiUrl).then(displayForecast);
+  axios.get(forecastApiUrl)
+    .then(displayForecast)
+    .catch(error => {
+      console.error("Error in forecast API request:", error);
+    });
 }
 
-
-
 function formatDate(date) {
-
   return date.toDateString();
 }
 
+const searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", search);
 
 window.onload = function () {
-  search({ preventDefault: () => {} }); 
+  search({ preventDefault: () => {} });
 };
-
-axios.get(currentWeatherApiUrl)
-  .then(response => {
-    displayTemperature(response);
-    getForecast(city);
-  })
-  .catch(error => {
-    console.error("Error in current weather API request:", error);
-  });
-
-axios.get(forecastApiUrl)
-  .then(displayForecast)
-  .catch(error => {
-    console.error("Error in forecast API request:", error);
-  });
 
 
