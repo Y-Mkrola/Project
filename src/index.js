@@ -53,39 +53,4 @@ function search(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
-function displayForecast() {
-  let days = ["Mon","Tue", "Wed", "Thur", "Fri", "Sat","Sun"];
-  let forecastHTML = "";
-
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-      <div class="weather-forecast-day">
-        <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon">🌙</div>
-        <div class="weather-forecast-temperature">
-          <div class="weather-forecast-temperature-max"><strong>22°</strong></div>
-          <div class="weather-forecast-temperature-min">15°</div>
-        </div>
-      </div>`;
-  });
-
-  let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = forecastHTML;
-}
-window.onload = function() {
-  displayForecast();
-};
-function getForecast(city) {
-  let apiKey = "6a31bo1005009840837b5525f35tf65a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
-
-  axios(apiUrl).then(displayForecast);
-}
-
-function displayForecast(response) {
-  console.log(response.data);
-
-}
 
