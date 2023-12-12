@@ -1,6 +1,7 @@
 body {
   background: url(https://upload.wikimedia.org/wikipedia/commons/7/71/Hole_In_The_Wall.jpg);
   font-family: "Roboto", sans-serif;
+  margin: 0 auto;
 }
 
 a {
